@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <style>
+      body {
+        background-color: black;
+        margin: 0px auto;
+        overflow: hidden;
+        
+        font-family: "Arial";
+        color: white;
+      }
+
+      h1 {
+        font-size: 100vh;
+        text-align: center;
+      }
+    </style>
+    <script>
+      // ID do personagem
+      const id = "60479e95-4bf3-44a9-9bf8-e157186bb0c4";
+
+      async function update() {
+        try {
+          const response = await fetch(
+            `https://olddragon.com.br/personagens/${id}.json`
+          );
+          if (!response.ok) {
+            throw new Error(response.status);
+          } else {
+            const json = await response.json();
+            const char = json.data.attributes;
+
+            for (let key of Object.keys(char)) {
+              const el = document.querySelector(`.${key}`);
+              if (el) el.innerHTML = char[key];
+            }
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      update();
+      setInterval(update, 30 * 1000); // 30 seconds
+
+      // refresh entire page after...
+      setTimeout(function () {
+        location.reload();
+      }, 60 * 60 * 1000); // 60 minutes
+    </script>
+  </head>
+  <body>
+    <h1><span class="health_points"></span>/<span class="max_hp"></span></h1>
+  </body>
+</html>
