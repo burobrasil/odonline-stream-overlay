@@ -17,7 +17,7 @@
     </style>
     <script>
       // ID do personagem
-      const id = "60479e95-4bf3-44a9-9bf8-e157186bb0c4";
+      const id = "59a2adaf-96e6-4569-827b-a172982cf13c";
 
       async function update() {
         try {
@@ -27,8 +27,7 @@
           if (!response.ok) {
             throw new Error(response.status);
           } else {
-            const json = await response.json();
-            const char = json.data.attributes;
+            const char = await response.json();
 
             for (let key of Object.keys(char)) {
               const el = document.querySelector(`.${key}`);
